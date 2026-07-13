@@ -1,0 +1,7 @@
+/* Styles moved to sub-components:
+   - EmergencySearching  (searching screen)
+   - EmergencyError      (error / no_ambulance screen)
+   - EmergencyArrival    (arrival confirmation screen)
+   - EmergencyFlowContainer (map + info panel)
+   - EmergencyExitDialog (exit confirmation dialog)
+ */

@@ -1,0 +1,225 @@
+.layout-container {
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+/* === SIDEBAR === */
+::ng-deep .mat-drawer-inner-container {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.layout-sidenav {
+  width: var(--sidebar-width);
+  border: none !important;
+  background: var(--sidebar-bg) !important;
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidenav-header {
+  padding: 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidenav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.brand-text {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.sidenav-section-label {
+  padding: 20px 20px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sidenav-nav {
+  flex: 1;
+  padding: 4px 8px !important;
+  overflow-y: auto;
+}
+
+.nav-item {
+  border-radius: 8px !important;
+  margin-bottom: 2px;
+  color: rgba(255, 255, 255, 0.7) !important;
+  --mat-list-list-item-leading-icon-color: rgba(255, 255, 255, 0.5);
+  --mat-list-list-item-hover-state-layer-color: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+  background: var(--sidebar-hover) !important;
+  color: white !important;
+  --mat-list-list-item-leading-icon-color: white;
+}
+
+.nav-item.active-link {
+  background: var(--sidebar-active) !important;
+  color: white !important;
+  --mat-list-list-item-leading-icon-color: white;
+}
+
+/* === SIDEBAR FOOTER === */
+.sidenav-footer {
+  margin-top: auto;
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-avatar mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.role-badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 1px 8px;
+  border-radius: 10px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.role-admin { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+.role-dispatcher { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+.role-driver { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+
+.sim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+}
+.sim-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.logout-btn {
+  color: rgba(255, 255, 255, 0.4) !important;
+  transition: color 0.2s;
+}
+
+.logout-btn:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+::ng-deep .logout-tooltip {
+  background: white !important;
+  color: #1a1a1a !important;
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+}
+
+/* === CONTENT === */
+.layout-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mobile-toolbar {
+  background: var(--black) !important;
+  color: white !important;
+  height: 56px;
+}
+
+.mobile-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .layout-sidenav { width: 280px; }
+}

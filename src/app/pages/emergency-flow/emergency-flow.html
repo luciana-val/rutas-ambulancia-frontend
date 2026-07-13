@@ -1,0 +1,56 @@
+@if (state() === 'requesting_location' || state() === 'searching') {
+  <app-emergency-searching [state]="state()" (exit)="requestExit()" />
+}
+
+@if (state() === 'found_confirmation') {
+  <app-emergency-found
+    [ambulancePlate]="ambulancePlate()"
+    [hospitalName]="hospitalName()"
+  />
+}
+
+@if (state() === 'arrived') {
+  <app-emergency-arrival
+    [ambulancePlate]="ambulancePlate()"
+    [driverName]="driverName()"
+    [hospitalName]="hospitalName()"
+    [confirmCountdown]="confirmCountdown()"
+    [timerOffset]="timerOffset()"
+  />
+}
+
+@if (state() === 'thanks') {
+  <app-emergency-thanks (goHome)="goHome()" />
+}
+
+@if (state() === 'no_ambulance' || state() === 'error') {
+  <app-emergency-error
+    [state]="state()"
+    [hospitalName]="hospitalName()"
+    [errorMsg]="errorMsg()"
+    (goHome)="goHome()"
+    (retry)="retry()"
+  />
+}
+
+@if (state() === 'found' || state() === 'fetching_route' || state() === 'simulating') {
+  <app-emergency-flow-container
+    [markers]="markers()"
+    [route]="routeCoords()"
+    [state]="state()"
+    [ambulancePlate]="ambulancePlate()"
+    [driverName]="driverName()"
+    [hospitalName]="hospitalName()"
+    [etaFormatted]="etaFormatted()"
+    [progress]="progress()"
+    (exit)="requestExit()"
+    (markerClick)="onMarkerClick($event)"
+  />
+}
+
+@if (showExitConfirm()) {
+  <app-emergency-exit-dialog
+    (confirmExit)="confirmExit()"
+    (cancelExit)="cancelExit()"
+  />
+}

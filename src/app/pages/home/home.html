@@ -1,0 +1,135 @@
+<mat-toolbar class="app-toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-left">
+      <mat-icon class="toolbar-icon">local_hospital</mat-icon>
+      <span class="toolbar-title">EmergenciaGO</span>
+    </div>
+    <nav class="toolbar-nav">
+      @if (auth.isAuthenticated()) {
+        <span class="user-name">{{ auth.user()?.name }}</span>
+        <button mat-stroked-button [routerLink]="['/' + auth.role()]">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      } @else {
+        <button mat-stroked-button routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Iniciar Sesión
+        </button>
+      }
+    </nav>
+    <button mat-icon-button class="menu-btn" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="mobile-menu" xPosition="before">
+      @if (auth.isAuthenticated()) {
+        <div mat-menu-item disabled class="menu-user">{{ auth.user()?.name }}</div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item [routerLink]="['/' + auth.role()]">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      } @else {
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Iniciar Sesión
+        </button>
+      }
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Solicitar Ambulancia</h1>
+
+    @if (!statusLoaded()) {
+      <div class="loading-status">
+        <mat-icon class="spin">sync</mat-icon>
+        <p>Verificando disponibilidad...</p>
+      </div>
+    } @else if (sim.status().enabled) {
+      <button class="emergency-btn" (click)="pressEmergency()">
+        <span class="emergency-ring"></span>
+        <svg class="emergency-icon" viewBox="0 -960 960 960" fill="white"><path d="M646.67-533.33V-600h66.66v66.67h-66.66Zm0-146.67v-200h66.66v200h-66.66ZM796-120q-119 0-240-55.5T333-333Q231-435 175.5-556T120-796q0-18.86 12.57-31.43T164-840h147.33q14 0 24.34 9.83Q346-820.33 349.33-806l26.62 130.43q2.05 14.9-.62 26.24-2.66 11.33-10.82 19.48L265.67-530q24 41.67 52.5 78.5T381-381.33q35 35.66 73.67 65.5Q493.33-286 536-262.67l94.67-96.66q9.66-10.34 23.26-14.5 13.61-4.17 26.74-2.17L806-349.33q14.67 4 24.33 15.53Q840-322.27 840-308v144q0 18.86-12.57 31.43T796-120ZM233-592l76-76.67-21-104.66H187q3 41.66 13.67 86Q211.33-643 233-592Zm365.33 361.33q40.34 18.34 85.84 29.67 45.5 11.33 89.16 13.67V-288l-100-20.33-75 77.66ZM233-592Zm365.33 361.33Z"/></svg>
+      </button>
+      <p class="hero-tap-label">Toca el botón para solicitar una ambulancia</p>
+    } @else {
+      <button class="emergency-btn" routerLink="/login">
+        <span class="emergency-ring"></span>
+        <svg class="emergency-icon" viewBox="0 -960 960 960" fill="white"><path d="M646.67-533.33V-600h66.66v66.67h-66.66Zm0-146.67v-200h66.66v200h-66.66ZM796-120q-119 0-240-55.5T333-333Q231-435 175.5-556T120-796q0-18.86 12.57-31.43T164-840h147.33q14 0 24.34 9.83Q346-820.33 349.33-806l26.62 130.43q2.05 14.9-.62 26.24-2.66 11.33-10.82 19.48L265.67-530q24 41.67 52.5 78.5T381-381.33q35 35.66 73.67 65.5Q493.33-286 536-262.67l94.67-96.66q9.66-10.34 23.26-14.5 13.61-4.17 26.74-2.17L806-349.33q14.67 4 24.33 15.53Q840-322.27 840-308v144q0 18.86-12.57 31.43T796-120ZM233-592l76-76.67-21-104.66H187q3 41.66 13.67 86Q211.33-643 233-592Zm365.33 361.33q40.34 18.34 85.84 29.67 45.5 11.33 89.16 13.67V-288l-100-20.33-75 77.66ZM233-592Zm365.33 361.33Z"/></svg>
+      </button>
+      <p class="hero-tap-label">Solicita una ambulancia pulsando el botón</p>
+    }
+  </div>
+  <div class="scroll-indicator">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="features-container">
+    <h2 class="section-title">¿Cómo funciona?</h2>
+    <p class="section-subtitle">Asistencia rápida en solo 3 pasos</p>
+    <div class="features-grid">
+      @for (feature of features(); track feature.title) {
+        <mat-card class="feature-card" appearance="outlined">
+          <mat-card-content>
+            <div class="feature-icon-wrapper">
+              <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+            </div>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-desc">{{ feature.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-container">
+    <h2 class="cta-title">¿Listo para actuar?</h2>
+    <p class="cta-subtitle">Nuestro equipo está disponible 24/7 para atender cualquier emergencia</p>
+  </div>
+</section>
+
+<footer class="app-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <mat-icon>local_hospital</mat-icon>
+      <span>EmergenciaGO</span>
+    </div>
+    <p class="footer-copy">&copy; 2026 EmergenciaGO. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+@if (showLocationPrompt()) {
+  <div class="location-overlay" (click)="denyLocation()">
+    <div class="location-dialog" (click)="$event.stopPropagation()">
+      <div class="location-icon-wrap">
+        <mat-icon class="location-icon">location_on</mat-icon>
+      </div>
+      <h2 class="location-title">Comparte tu ubicación</h2>
+      <p class="location-desc">Necesitamos conocer tu ubicación para enviarte la ambulancia más cercana.</p>
+      <div class="location-actions">
+        @if (locationLoading()) {
+          <div class="location-loading">
+            <mat-icon class="spin">sync</mat-icon>
+            <span>Obteniendo ubicación...</span>
+          </div>
+        } @else {
+          <button class="location-btn location-btn-allow" (click)="allowLocation()">
+            <mat-icon>check</mat-icon>
+            Sí, compartir
+          </button>
+          <button class="location-btn location-btn-deny" (click)="denyLocation()">
+            <mat-icon>close</mat-icon>
+            Ahora no
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+}

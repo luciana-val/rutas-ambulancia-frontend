@@ -1,0 +1,71 @@
+<mat-drawer-container class="layout-container" autosize>
+  <mat-drawer
+    #drawer
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="!isMobile()"
+    class="layout-sidenav"
+  >
+    <div class="sidenav-header">
+      <div class="sidenav-brand">
+        <mat-icon class="brand-icon">local_hospital</mat-icon>
+        <span class="brand-text">EmergenciaGO</span>
+      </div>
+    </div>
+
+    <div class="sidenav-section-label">{{ navSectionLabel }}</div>
+
+    <mat-nav-list class="sidenav-nav">
+      @for (item of filteredNavItems; track item.route) {
+        <a
+          mat-list-item
+          [routerLink]="[item.route]"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMobile() && drawer.close()"
+          class="nav-item"
+        >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+
+    <div class="sidenav-footer">
+      <div class="user-info">
+        <div class="user-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ auth.user()?.name }}</span>
+          <div class="role-row">
+            <span class="user-role role-badge role-{{ auth.role() }}">{{ auth.role() }}</span>
+            @if (simulation.status().enabled) {
+              <span class="sim-badge">
+                <span class="sim-dot"></span>
+                Simulación Activa
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="onLogout()" class="logout-btn" matTooltip="Cerrar sesión" matTooltipClass="logout-tooltip">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </mat-drawer>
+
+  <div class="layout-content">
+    @if (isMobile()) {
+      <mat-toolbar class="mobile-toolbar">
+        <button mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="mobile-title">EmergenciaGO</span>
+      </mat-toolbar>
+    }
+
+    <main class="page-content">
+      <router-outlet />
+    </main>
+  </div>
+</mat-drawer-container>
