@@ -44,7 +44,7 @@ const FILTER_STATUSES = [
 
 @Component({
   selector: 'app-hospital-dashboard',
-  imports: [RouterLink, MapView, MatCardModule, MatIconModule, MatButtonModule, MatListModule, NgClass, AlertDetailDialog, AmbulanceTrackDialog],
+  imports: [RouterLink, MapView, MatCardModule, MatIconModule, MatButtonModule, MatListModule, NgClass],
   template: `
     <div class="dashboard-container">
       <div class="stats-wrapper">
@@ -374,6 +374,21 @@ const FILTER_STATUSES = [
         font-size: 12px; padding: 8px 12px; min-width: 0;
       }
     }
+    .dialog-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dialog-box {
+      background: white; border-radius: 12px; padding: 24px; max-width: 90vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .dialog-wide { width: 700px; max-height: 90vh; overflow-y: auto; }
+    .dialog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .dialog-header h3 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 18px; }
+    .tableau-details { margin-top: 8px; }
+    .tableau-details summary { cursor: pointer; font-weight: 600; color: #1565c0; font-size: 13px; }
+    .tableau-iter { margin: 8px 0; }
+    .tableau-iter pre { background: #1e1e1e; color: #b5cea8; padding: 12px; border-radius: 8px; font-size: 11px; overflow-x: auto; max-height: 300px; }
   `],
 })
 export class HospitalDashboard {
@@ -567,4 +582,5 @@ export class HospitalDashboard {
       },
     });
   }
+
 }

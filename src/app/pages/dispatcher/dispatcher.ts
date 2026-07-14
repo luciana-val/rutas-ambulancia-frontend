@@ -222,6 +222,13 @@ const ALERT_LABELS: Record<string, string> = {
     .dialog-coords { color: #999; font-size: 13px; margin: 0 0 16px; }
     .full-width { width: 100%; margin-bottom: 12px; }
     .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+    .dialog-wide { width: 700px; max-width: 95vw; max-height: 90vh; overflow-y: auto; }
+    .dialog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .dialog-header h3 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 18px; }
+    .tableau-details { margin-top: 8px; }
+    .tableau-details summary { cursor: pointer; font-weight: 600; color: #1565c0; font-size: 13px; }
+    .tableau-iter { margin: 8px 0; }
+    .tableau-iter pre { background: #1e1e1e; color: #b5cea8; padding: 12px; border-radius: 8px; font-size: 11px; overflow-x: auto; max-height: 300px; }
   `],
 })
 export class Dispatcher {
