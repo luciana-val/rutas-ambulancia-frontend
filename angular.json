@@ -19,9 +19,7 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "define": {
-              "MAPBOX_TOKEN": "${MAPBOX_TOKEN}"
-            },
+
             "assets": [
               {
                 "glob": "**/*",
